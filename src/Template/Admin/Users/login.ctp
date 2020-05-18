@@ -1,5 +1,5 @@
 <?=$this->Form->create('post', array('class' => 'form-signin'))?>
-<?=$this->Html->icon('icon.png', array(
+<?=$this->Html->image('cakephp.png', array(
     'class' => 'mb-8',
 
     'alt' => 'texto de login',
@@ -26,4 +26,5 @@
 
 
 <?=$this->Form->button(__('Acessar'), ['class' => 'btn btn-lg btn-danger btn-block'])?>
+<p class="text-center"> Esqueceu a sua senha? </p>
 <?=$this->Form->end()?>
