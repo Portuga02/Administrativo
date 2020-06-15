@@ -47,7 +47,7 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
+        $this->loadComponent('Auth', [ //  FUNÇÃO DE SEGURANÇA DO CAKEPHP
             'loginRedirect' => [
                 'controller' => 'Welcome',
                 'action' => 'index'
@@ -75,6 +75,8 @@ class AppController extends Controller
         if ($prefix == 'admin') {
             if (($this->request->getParam(['action']) !== null) and ($this->request->getParam(['action']) == 'login')) {
                 $this->viewBuilder()->setLayout('login');
+            } else{
+                $this->viewBuilder()->setLayout('admin');  //FUNÇÃO VERIFICADORA PARA CASO NÃO CARREGAR A TELA DE LOGIN ENTRAR NO ADM 
             }
         }
     }
