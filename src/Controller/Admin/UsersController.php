@@ -54,11 +54,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(('Usuário Salvo com sucesso.'));
+                $this->Flash->success((' O Usuário Salvo com sucesso.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(('O usuário não foi salvo. Por favor tente novamente.'));
+            $this->Flash->error(('O usuário não foi salvo. Por favor, tente novamente.'));
         }
         $this->set(compact('user'));
     }
@@ -106,6 +106,7 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+	/*FUNÇÃO VERIFICADORA DA TELA DE LOGIN*/
     public function login()
     {
         if ($this->request->is('post')) {
@@ -113,12 +114,15 @@ class UsersController extends AppController
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
-            }
+            }else{
+				$this->Flash->danger(__('Erro: Usuário não autenticado ou login e senha incorretos'));
+				
+			}
         }
     }
-
+		/*FUNÇÃO PARA DESLOGAR O USUÁRIO DO SISTEMA*/
     public function logout()
-    {
+    {	$this->Flash->success(__('Deslogado com sucesso!')); // 
         return $this->redirect($this->Auth->logout());
     }
 }
