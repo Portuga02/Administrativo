@@ -22,6 +22,10 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'limit' => 5
+
+        ]; /*limitador de quantidade por paginas*/
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
@@ -106,7 +110,7 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-	/*FUNÇÃO VERIFICADORA DA TELA DE LOGIN*/
+    /*FUNÇÃO VERIFICADORA DA TELA DE LOGIN*/
     public function login()
     {
         if ($this->request->is('post')) {
@@ -114,15 +118,15 @@ class UsersController extends AppController
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
-            }else{
-				$this->Flash->danger(__('Erro: Usuário não autenticado ou login e senha incorretos'));
-				
-			}
+            } else {
+                $this->Flash->danger(__('Erro: Usuário não autenticado ou login e senha incorretos'));
+            }
         }
     }
-		/*FUNÇÃO PARA DESLOGAR O USUÁRIO DO SISTEMA*/
+    /*FUNÇÃO PARA DESLOGAR O USUÁRIO DO SISTEMA*/
     public function logout()
-    {	$this->Flash->success(__('Deslogado com sucesso!')); // 
+    {
+        $this->Flash->success(__('Deslogado com sucesso!')); // 
         return $this->redirect($this->Auth->logout());
     }
 }

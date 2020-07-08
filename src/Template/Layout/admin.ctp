@@ -46,7 +46,7 @@ $cakeDescription = 'Administrativo';
     <div class="d-flex">
         <nav class="sidebar">
             <ul class="list-unstyled">
-                <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-tachometer-alt"></i> Inicio</a></li>
                 <li>
                     <a href="#submenu1" data-toggle="collapse">
                         <i class="fas fa-user"></i> Usuário
@@ -74,7 +74,7 @@ $cakeDescription = 'Administrativo';
 
         <div class="content p-1">
             <div class="list-group-item">
-                <?= $this->Flash->render() ?>
+                
                 <?= $this->fetch('content') ?>
             </div>
         </div>
