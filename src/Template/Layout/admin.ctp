@@ -4,9 +4,10 @@ $cakeDescription = 'Administrativo';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
@@ -21,6 +22,7 @@ $cakeDescription = 'Administrativo';
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
+
 <body>
     <nav class="navbar navbar-expand navbar-dark bg-primary">
         <a class="sidebar-toggle text-light mr-3">
@@ -39,7 +41,7 @@ $cakeDescription = 'Administrativo';
                         <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sair</a>
                     </div>
                 </li>
-            </ul>                
+            </ul>
         </div>
     </nav>
 
@@ -74,12 +76,13 @@ $cakeDescription = 'Administrativo';
 
         <div class="content p-1">
             <div class="list-group-item">
-                
+
                 <?= $this->fetch('content') ?>
             </div>
         </div>
-    </div>    
+    </div>
 
     <?= $this->Html->script(['jquery-3.3.1.min', 'popper.min', 'bootstrap.min', 'dashboard']) ?>
 </body>
+
 </html>
