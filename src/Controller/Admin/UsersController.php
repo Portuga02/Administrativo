@@ -23,7 +23,7 @@ class UsersController extends AppController
     public function index()
     {
         $this->paginate = [
-            'limit' => 5
+            'limit' => 40
 
         ]; /*limitador de quantidade por paginas*/
         $users = $this->paginate($this->Users);
