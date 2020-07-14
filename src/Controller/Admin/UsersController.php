@@ -62,7 +62,7 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(('O usuário não foi salvo. Por favor, tente novamente.'));
+            $this->Flash->danger(('O usuário não foi salvo. Por favor, tente novamente.'));
         }
         $this->set(compact('user'));
     }

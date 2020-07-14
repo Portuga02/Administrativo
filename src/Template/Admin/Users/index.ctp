@@ -15,6 +15,7 @@
     </a>
 </div>
 <?= $this->Flash->render() ?>
+<!--- utilziado para mostrar o nome do usuário cadastrado no sistema-->
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered">
         <thead>

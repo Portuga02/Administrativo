@@ -34,11 +34,11 @@ $cakeDescription = 'Administrativo';
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle menu-header" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                        <img class="rounded-circle" src="imagem/icon.png" width="20" height="20"> &nbsp;<span class="d-none d-sm-inline">Usuário</span>
+                        <img class="rounded-circle" src="../img/icon.png" width="20" height="20"> &nbsp;<span class="d-none d-sm-inline">Usuário</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Perfil</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sair <?= $this->Html->link(__('Sair'), ['controller'=>'users','action' => 'logout']) ?></a>
                     </div>
                 </li>
             </ul>
@@ -70,7 +70,7 @@ $cakeDescription = 'Administrativo';
                 <li><a href="#"> Item 2</a></li>
                 <li><a href="#"> Item 3</a></li>
                 <li class="active"><a href="#"> Item 4</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair<?= $this->Html->link(__('Sair'), ['controller'=>'users','action' => 'logout']) ?></a></li>
             </ul>
         </nav>
 

@@ -11,7 +11,7 @@
         <li><?= $this->Form->postLink(
                 __('Deletar'),
                 ['action' => 'delete', $user->id],
-                ['confirm' => __('Você realmnete deseja excluir o usuario # {0}?', $user->id)]
+                ['confirm' => __('Você realmente deseja excluir o usuario # {0}?', $user->id)]
             )
             ?></li>
         <li><?= $this->Html->link(__('Lista de Usuários'), ['action' => 'index']) ?></li>
