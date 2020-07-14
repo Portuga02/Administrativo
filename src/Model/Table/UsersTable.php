@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -70,9 +71,15 @@ class UsersTable extends Table
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 220)
+            ->maxLength('password', 6)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password')
+            ->add('password', [
+                'length' => [
+                    'rule' => ['minLength', 6],
+                    'message' => 'A senha deve conter no minimo 06 caracteres para ser cadastrado',
+                ]
+            ]);
 
         return $validator;
     }
@@ -86,8 +93,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->isUnique(['username']));
+        $rules->add($rules->isUnique(['email'], 'Este email já está cadastrado no sistema'));
+        $rules->add($rules->isUnique(['username'], 'Este nome de usuário já está cadastrado no sistema'));
 
         return $rules;
     }
