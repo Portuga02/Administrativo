@@ -35,9 +35,9 @@
                     <td><?= h($user->email) ?></td>
                     <td><?= h($user->created) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $user->id]) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id]) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $user->id], ['confirm' => __('Você tem certeza que deseja deletar  # {0}?', $user->id)]) ?>
+                        <?= $this->Html->link(__('Visualizar'), ['action' => 'Visualizar', $user->id]) ?>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'Editar', $user->id]) ?>
+                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'Deletar', $user->id], ['confirm' => __('Você tem certeza que deseja deletar  # {0}?', $user->id)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
