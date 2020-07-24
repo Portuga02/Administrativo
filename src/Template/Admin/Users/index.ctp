@@ -29,17 +29,17 @@
         </thead>
         <tbody>
             <?php foreach ($users as $user) : ?>
-                <tr>
-                    <td><?= $this->Number->format($user->id) ?></td>
-                    <td><?= h($user->name) ?></td>
-                    <td><?= h($user->email) ?></td>
-                    <td><?= h($user->created) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $user->id],['class="btn btn-outline-primary btn-sm"']) ?>
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id],['class="btn btn-outline-warning btn-sm"']) ?>
-                        <?= $this->Form->postLink(__('Deletar'), ['action' => 'Delete', $user->id], ['confirm' => __('Você tem certeza que deseja deletar  # {0}?', $user->id), ['class="btn btn-outline-danger btn-sm" ']]) ?>
-                    </td>
-                </tr>
+            <tr>
+                <td><?= $this->Number->format($user->id) ?></td>
+                <td><?= h($user->name) ?></td>
+                <td><?= h($user->email) ?></td>
+                <td><?= h($user->created) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $user->id],['class="btn btn-outline-primary btn-sm"']) ?>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id],['class="btn btn-outline-warning btn-sm"']) ?>
+                    <?= $this->Form->postLink(__('Deletar'), ['action' => 'Delete', $user->id], ['confirm' => __('Você tem certeza que deseja deletar  # {0}?', $user->id), ['class="btn btn-outline-danger btn-sm" ']]) ?>
+                </td>
+            </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

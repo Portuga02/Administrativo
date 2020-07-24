@@ -86,7 +86,7 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(('O usuário não foi salvo. Por favor tente novamente.'));
+            $this->Flash->danger(('O usuário não foi salvo. Por favor tente novamente.'));
         }
         $this->set(compact('user'));
     }
@@ -105,7 +105,7 @@ class UsersController extends AppController
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('o Usuário foi deletado.'));
         } else {
-            $this->Flash->error(__('O usuário não foi deletado. Por favor tente novamente.'));
+            $this->Flash->danger(__('O usuário não foi deletado. Por favor tente novamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
