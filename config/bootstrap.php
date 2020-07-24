@@ -201,3 +201,9 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+
+
+Cake\I18n\FrozenDate::setToStringFormat('dd/MM/yyyy HH:mm:ss') ;
+
+/*FUNÇÃO REQUERIDA PARA CRIAÇÃO DE DATA E HORA NO FORMATO DO PORTUGUES LATINO OU PORTUGUES DO BRASIL, MAIS DETALHES EM DOCUMENTAÇÃO DO CAKEPHP*/
