@@ -5,6 +5,8 @@
     <?= $this->Flash->render() ?>
     <div class="p-2">
         <?= $this->Html->link(__('Listar'), ['controller' => 'users', 'action' => 'index'], ['class' => 'btn btn-outline-info btn-sm']); ?>
+        <?= $this->Html->link(__('Visualizar'), ['controller' => 'users', 'action' => 'view', $user->id], ['class' => 'btn btn-outline-primary btn-sm']); ?>
+        <?= $this->Form->postLink(__('Apagar'), ['controller' => 'users', 'action' => 'delete', $user->id], ['class' => 'btn btn-outline-danger btn-sm', 'confirm'=>__('Realmente deseja apagar o usuáriom #{0}?', $user->id)]); ?>
     </div>
 </div>
 <hr>
@@ -23,22 +25,23 @@
 </div>
 <?= $this->Form->create($user) ?>
 <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12">
         <label><span class="text-danger">*</span> Usuário</label>
         <?= $this->Form->control('username', ['class' => 'form-control', 'placeholder' => 'Nome do Usuário', 'label' =>
         false]); ?>
 
     </div>
+    <!--
     <div class="form-group col-md-6">
-        <label><span class="text-danger">*</span> Senha</label>
+         <label><span class="text-danger">*</span> Senha</label>
         <?= $this->Form->control('password', ['class' => 'form-control', 'placeholder' => 'Digite sua senha ', 'label' => false]);  ?>
 
-    </div>
+    </div> -->
 </div>
 <p>
     <span class="text-danger">* </span>Campo obrigatório
 </p>
 
-<?= $this->Form->button(__('Editar'), ['class' => 'btn btn-success']) ?>
+<?= $this->Form->button(__('Salvar'), ['class' => 'btn btn-success']) ?>
 
 <?= $this->Form->end(); ?>

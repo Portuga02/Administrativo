@@ -35,9 +35,9 @@
                 <td><?= h($user->email) ?></td>
                 <td><?= h($user->created) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $user->id],['class="btn btn-outline-primary btn-sm"']) ?>
-                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id],['class="btn btn-outline-warning btn-sm"']) ?>
-                    <?= $this->Form->postLink(__('Deletar'), ['action' => 'Delete', $user->id], ['confirm' => __('Você tem certeza que deseja deletar  # {0}?', $user->id), ['class="btn btn-outline-danger btn-sm" ']]) ?>
+                    <?= $this->Html->link(__('Visualizar'), ['controller' =>'users', 'action' => 'view', $user->id],['class="btn btn-outline-primary btn-sm"']) ?>
+                    <?= $this->Html->link(__('Editar'), ['controller' =>'users','action' => 'edit', $user->id],['class="btn btn-outline-warning btn-sm"']) ?>
+                    <?= $this->Form->postLink(__('Deletar'), ['controller' =>'users','action' => 'delete', $user->id], ['confirm' => __('Você tem certeza que deseja deletar  # {0}?', $user->id), ['class="btn btn-outline-danger btn-sm" ']]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
