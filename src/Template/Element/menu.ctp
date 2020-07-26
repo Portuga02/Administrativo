@@ -25,7 +25,7 @@
                 <li><?= $this->html->link('
             <i class="fas fa-users"></i> Listar Usuários',
             [
-                'controller' =>'users',
+                'controller' =>'users', // lembrar se sempre apontar para o controler certo e após isso à ação necessária 
                  'action' =>'index'
             ],
             [

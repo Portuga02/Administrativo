@@ -77,8 +77,13 @@ class AppController extends Controller
             if (($this->request->getParam(['action']) !== null) and ($this->request->getParam(['action']) == 'login')) {
                 $this->viewBuilder()->setLayout('login');
             } else{
+                $perfilUser =$this->Auth->user();
+                $this->set(compact('perfilUser'));
                 $this->viewBuilder()->setLayout('admin');  //FUNÇÃO VERIFICADORA PARA CASO NÃO CARREGAR A TELA DE LOGIN ENTRAR NO ADM 
             }
         }
     }
 }
+
+
+/* O metodo beforeRender é utilizado antes e carregar a view, olhar a documentaçao0 do cake nas partes de controoller*/

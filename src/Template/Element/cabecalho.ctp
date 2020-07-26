@@ -10,8 +10,13 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle menu-header" href="#" id="navbarDropdownMenuLink"
                     data-toggle="dropdown">
-                    <img class="rounded-circle" src="webroot/img/logo_celke.png" width="20" height="20"> &nbsp;<span
-                        class="d-none d-sm-inline">Usuário</span>
+                    <?php if(!empty($perfilUser['imagem'])){?>
+                        <?= $this->Html->image('../files/user/'.$perfilUser['id'].'/'.$perfilUser['imagem'],['class' => 'rounded-circle','width'=>'40px', 'height'=>  '40px']) ?>
+                  &nbsp;
+                    <?php  } else{ ?>
+                        <?= $this->Html->image('../files/user/icone_usuario.jpg',['class' => 'rounded-circle','width'=>'40px', 'height'=>  '40px']) ?> &nbsp;
+                    <?php }  ?>
+                  <span class="d-none d-sm-inline"><?= current(str_word_count($perfilUser['name'],2))?></span>   <!--- Passando o parametro do banco por array para que seja impresso no sistema o nome do usuário logado--> 
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Perfil</a>
