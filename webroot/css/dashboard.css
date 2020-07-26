@@ -5,7 +5,7 @@ body {
     color: #FFF !important;
 }
 .sidebar{
-    background-color: #222C74;
+    background-color: #222CBB;
     min-width: 250px;
     max-width: 250px;
     min-height: calc(100vh - 56px);
@@ -18,7 +18,7 @@ body {
     text-decoration: none;
 }
 .sidebar ul li a:hover, .sidebar ul .active a{
-    color: #ecedee;
+    color: #000000;
     background-color: #7697c8;
 }
 .sidebar ul ul a{
