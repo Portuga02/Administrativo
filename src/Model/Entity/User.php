@@ -16,8 +16,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate $created
  * @property \Cake\I18n\FrozenDate|null $modified
  */
-class User extends Entity
-{
+class User extends Entity {
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -44,10 +44,11 @@ class User extends Entity
     protected $_hidden = [
         'password',
     ];
-    protected function _setPassword($password)
-    {
+
+    protected function _setPassword($password) {
         if (strlen($password) > 0) {
             return (new DefaultPasswordHasher)->hash($password);
         }
     }
+
 }
