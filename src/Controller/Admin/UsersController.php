@@ -13,121 +13,143 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController {
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null
-     */
-    public function index() {
-        $this->paginate = [
-            'limit' => 40
-        ]; /* limitador de quantidade por paginas */
-        $users = $this->paginate($this->Users);
+	/**
+	 * Index method
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
+	public function index() {
+		$this->paginate = [
+			'limit' => 40,
+		]; /* limitador de quantidade por paginas */
+		$users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
-    }
+		$this->set(compact('users'));
+	}
 
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null) {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+	/**
+	 * View method
+	 *
+	 * @param string|null $id User id.
+	 * @return \Cake\Http\Response|null
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function view($id = null) {
+		$user = $this->Users->get($id, [
+			'contain' => [],
+		]);
 
-        $this->set('user', $user);
-    }
+		$this->set('user', $user);
+	}
 
-    public function perfil() {  // metodo para listar o perfil do usuário
-        $user = $this->Auth->user();
+	public function perfil() {
+		// metodo para listar o perfil do usuário
+		$user = $this->Auth->user();
 
-        $this->set(compact('user'));
-    }
+		$this->set(compact('user'));
+	}
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add() {
-        $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success((' O Usuário Salvo com sucesso.'));
+	/**
+	 * Add method
+	 *
+	 * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+	 */
+	public function add() {
+		$user = $this->Users->newEntity();
+		if ($this->request->is('post')) {
+			$user = $this->Users->patchEntity($user, $this->request->getData());
+			if ($this->Users->save($user)) {
+				$this->Flash->success((' O Usuário Salvo com sucesso.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->danger(('O usuário não foi salvo. Por favor, tente novamente.'));
-        }
-        $this->set(compact('user'));
-    }
+				return $this->redirect(['action' => 'index']);
+			}
+			$this->Flash->danger(('O usuário não foi salvo. Por favor, tente novamente.'));
+		}
+		$this->set(compact('user'));
+	}
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null) {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('o Usuário foi salvo com sucesso.'));
+	/**
+	 * Edit method
+	 *
+	 * @param string|null $id User id.
+	 * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function edit($id = null) {
+		$user = $this->Users->get($id, [
+			'contain' => [],
+		]);
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$user = $this->Users->patchEntity($user, $this->request->getData());
+			if ($this->Users->save($user)) {
+				$this->Flash->success(__('o Usuário foi salvo com sucesso.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->danger(('O usuário não foi salvo. Por favor tente novamente.'));
-        }
-        $this->set(compact('user'));
-    }
+				return $this->redirect(['action' => 'index']);
+			}
+			$this->Flash->danger(('O usuário não foi salvo. Por favor tente novamente.'));
+		}
+		$this->set(compact('user'));
+	}
+	public function editPerfil() {
+		$user_id = $this->Auth->user('id');
+		$user = $this->Users->get($user_id, [
+			'contain' => [],
+		]);
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('o Usuário foi deletado.'));
-        } else {
-            $this->Flash->danger(__('O usuário não foi deletado. Por favor tente novamente.'));
-        }
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$user = $this->Users->patchEntity($user, $this->request->getData());
+			if ($this->Users->save($user)) {
+				if ($this->Auth->user('id') === $user->id) {
+					$data = $user->toArray();
+					$this->Auth->setUser($data);
+				}
+				$this->Flash->success(__('o Perfil foi salvo com sucesso.'));
 
-        return $this->redirect(['action' => 'index']);
-    }
+				return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
+			}
+			$this->Flash->danger(('O perfil não foi salvo. Por favor tente novamente.'));
+		}
+		$this->set(compact('user'));
 
-    /* FUNÇÃO VERIFICADORA DA TELA DE LOGIN */
+	}
+	/**
+	 * Delete method
+	 *
+	 * @param string|null $id User id.
+	 * @return \Cake\Http\Response|null Redirects to index.
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function delete($id = null) {
+		$this->request->allowMethod(['post', 'delete']);
+		$user = $this->Users->get($id);
+		if ($this->Users->delete($user)) {
+			$this->Flash->success(__('o Usuário foi deletado.'));
+		} else {
+			$this->Flash->danger(__('O usuário não foi deletado. Por favor tente novamente.'));
+		}
 
-    public function login() {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            } else {
-                $this->Flash->danger(__('Erro: Usuário não autenticado ou login e senha incorretos'));
-            }
-        }
-    }
+		return $this->redirect(['action' => 'index']);
+	}
 
-    /* FUNÇÃO PARA DESLOGAR O USUÁRIO DO SISTEMA */
+	/* FUNÇÃO VERIFICADORA DA TELA DE LOGIN */
 
-    public function logout() {
-        $this->Flash->success(__('Deslogado com sucesso!')); // 
-        return $this->redirect($this->Auth->logout());
-    }
+	public function login() {
+		if ($this->request->is('post')) {
+			$user = $this->Auth->identify();
+			if ($user) {
+				$this->Auth->setUser($user);
+				return $this->redirect($this->Auth->redirectUrl());
+			} else {
+				$this->Flash->danger(__('Erro: Usuário não autenticado ou login e senha incorretos'));
+			}
+		}
+	}
+
+	/* FUNÇÃO PARA DESLOGAR O USUÁRIO DO SISTEMA */
+
+	public function logout() {
+		$this->Flash->success(__('Deslogado com sucesso!')); //
+		return $this->redirect($this->Auth->logout());
+	}
 
 }

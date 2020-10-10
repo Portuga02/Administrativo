@@ -1,19 +1,34 @@
 <div class="d-flex">
     <div class="mr-auto p-2">
-        <h2 class="display-4 titulo">Editar Usuário</h2>
+        <h2 class="display-4 titulo">Editar Perfil</h2>
     </div>
-    <?= $this->Flash->render() ?>
+   
     <div class="p-2">
-        <span class="d-none d-md-block">
-        <?= $this->Html->link(__('Listar'), ['controller' => 'users', 'action' => 'index'], ['class' => 'btn btn-outline-info btn-sm']); ?>
-        <?= $this->Html->link(__('Visualizar'), ['controller' => 'users', 'action' => 'view', $user->id], ['class' => 'btn btn-outline-primary btn-sm']); ?>
-        <?= $this->Form->postLink(__('Apagar'), ['controller' => 'users', 'action' => 'delete', $user->id], ['class' => 'btn btn-outline-danger btn-sm', 'confirm' => __('Realmente deseja apagar o usuáriom #{0}?', $user->id)]); ?>
+    	<span class="d-none d-md-block">
+      
+
+        <?= $this->Html->link(__('Visualizar'), ['controller' => 'Users', 'action' => 'perfil'], ['class' => 'btn btn-outline-primary btn-sm']); ?>
+        
+
         </span>
     </div>
+    <div class="dropdown d-block d-md-none">
+            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                Ações
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
+                <?= $this->Html->link(__('Visualizar'), ['controller' => 'Users', 'action' => 'perfil'], ['class' => "dropdown-item"]) ?>
+                <a class="dropdown-item" href="listar.html">Listar</a>
+                <a class="dropdown-item" href="editar.html">Editar</a>
+                <a class="dropdown-item" href="apagar.html" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+            </div> 
+</div>
 </div>
 <hr>
-<?=$this->Flash->render() ?>
+<?= $this->Flash->render() ?>
 <?= $this->Form->create($user) ?>
+
 <div class="form-row">
     <div class="form-group col-md-6">
         <label><span class="text-danger">*</span> Nome</label>
@@ -38,6 +53,7 @@
     </div>
   
 </div>
+
 <p>
     <span class="text-danger">* </span>Campo obrigatório
 </p>
