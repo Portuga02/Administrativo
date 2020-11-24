@@ -6,7 +6,7 @@
         <span class="d-none d-md-block">
             <?= $this->Html->link(__('Listar'), ['controller' => 'users', 'action' => 'index'], ['class="btn btn-outline-info btn-sm"']) ?>
             <?= $this->Html->link(__('Editar'), ['controller' => 'users', 'action' => 'edit', $user->id], ['class="btn btn-outline-warning btn-sm"']) ?>
-            <?= $this->Html->link(__('Deletar'), ['controller' => 'users', 'action' => 'delete', $user->id], ['confirm' => __('Você realmente deseja deletar  #{0} ?', $user->id), ['class="btn btn-outline-danger btn-sm"']]) ?>
+            <?= $this->Html->link(__('Deletar'),['controller' => 'users', 'action' => 'delete', $user->id], ['confirm' => __('Você realmente deseja deletar  #{0} ?', $user->id), ['class="btn btn-outline-danger btn-sm"']]) ?>
 
         </span>
         <div class="dropdown d-block d-md-none">
