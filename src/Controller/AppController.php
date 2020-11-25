@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -8,7 +9,8 @@ use Cake\Event\Event;
 
  * @link https://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
+class AppController extends Controller
+{
 
 	/**
 
@@ -16,13 +18,15 @@ class AppController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function initialize() {
+	public function initialize()
+	{
 		parent::initialize();
 
 		$this->loadComponent('RequestHandler', [
 			'enableBeforeRedirect' => false,
 		]);
 		$this->loadComponent('Flash');
+
 		$this->loadComponent('Auth', [ //  FUNÇÃO DE SEGURANÇA DO CAKEPHP
 			'loginRedirect' => [
 				'controller' => 'Welcome',
@@ -42,12 +46,13 @@ class AppController extends Controller {
 		//$this->loadComponent('Security');
 
 	}
-	public function beforeRender(Event $event) {
+	public function beforeRender(Event $event)
+	{
 		$prefix = null;
 		if ($this->request->getParam(['prefix']) !== null) {
 			$prefix = $this->request->getParam(['prefix']);
 		}
-
+		// parte onde se seta o layout do admin
 		if ($prefix == 'admin') {
 			if (($this->request->getParam(['action']) !== null) and ($this->request->getParam(['action']) == 'login')) {
 				$this->viewBuilder()->setLayout('login');
