@@ -26,6 +26,7 @@
                     <!--- Passando o parametro do banco por array para que seja impresso no sistema o nome do usuário logado-->
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  
                     <?= $this->Html->link(
                         '<i class="fas fa-user"></i> Perfil',
                         [

@@ -9,8 +9,7 @@
 
         </span>
         <div class="dropdown d-block d-md-none">
-            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Ações
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
@@ -32,7 +31,7 @@
     <dd class="col-sm-9"><?= $user['id'] ?></dd>
 
     <dt class="col-sm-3">Nome</dt>
-    <dd class="col-sm-9"><?= $user['name'] ?>    </dd>
+    <dd class="col-sm-9"><?= $user['name'] ?> </dd>
 
     <dt class="col-sm-3">Usuário</dt>
     <dd class="col-sm-9"><?= $user['username'] ?></dd>
