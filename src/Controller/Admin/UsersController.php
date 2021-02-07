@@ -11,14 +11,16 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
 	/**
 	 * Index method
 	 *
 	 * @return \Cake\Http\Response|null
 	 */
-	public function index() {
+	public function index()
+	{
 		$this->paginate = [
 			'limit' => 40,
 		]; /* limitador de quantidade por paginas */
@@ -34,7 +36,8 @@ class UsersController extends AppController {
 	 * @return \Cake\Http\Response|null
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
-	public function view($id = null) {
+	public function view($id = null)
+	{
 		$user = $this->Users->get($id, [
 			'contain' => [],
 		]);
@@ -42,7 +45,8 @@ class UsersController extends AppController {
 		$this->set('user', $user);
 	}
 
-	public function perfil() {
+	public function perfil()
+	{
 		// metodo para listar o perfil do usuário
 		$user = $this->Auth->user();
 
@@ -54,7 +58,8 @@ class UsersController extends AppController {
 	 *
 	 * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
 	 */
-	public function add() {
+	public function add()
+	{
 		$user = $this->Users->newEntity();
 		if ($this->request->is('post')) {
 			$user = $this->Users->patchEntity($user, $this->request->getData());
@@ -75,7 +80,8 @@ class UsersController extends AppController {
 	 * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
-	public function edit($id = null) {
+	public function edit($id = null)
+	{
 		$user = $this->Users->get($id, [
 			'contain' => [],
 		]);
@@ -90,7 +96,25 @@ class UsersController extends AppController {
 		}
 		$this->set(compact('user'));
 	}
-	public function editPerfil() {
+
+	public function editSenha($id = null)
+	{
+		$user = $this->Users->get($id, [
+			'contain' => [],
+		]);
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$user = $this->Users->patchEntity($user, $this->request->getData());
+			if ($this->Users->save($user)) {
+				$this->Flash->success(__('Senha do usuário atualizada com sucesso.'));
+
+				return $this->redirect(['action' => 'index']);
+			}
+			$this->Flash->danger(('A senha não foi atualizada. Por favor tente novamente.'));
+		}
+		$this->set(compact('user'));
+	}
+	public function editPerfil()
+	{
 		$user_id = $this->Auth->user('id');
 		$user = $this->Users->get($user_id, [
 			'contain' => [],
@@ -110,7 +134,25 @@ class UsersController extends AppController {
 			$this->Flash->danger(('O perfil não foi salvo. Por favor tente novamente.'));
 		}
 		$this->set(compact('user'));
+	}
+	public function editSenhaPerfil()
+	{
+		$user_id = $this->Auth->user('id');
+		$user = $this->Users->get($user_id, [
+			'contain' => [],
+		]);
 
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$user = $this->Users->patchEntity($user, $this->request->getData());
+			if ($this->Users->save($user)) {
+
+				$this->Flash->success(__('o Senha foi editada com sucesso.'));
+
+				return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
+			}
+			$this->Flash->danger((' Senha não foi editada. Por favor tente novamente.'));
+		}
+		$this->set(compact('user'));
 	}
 	/**
 	 * Delete method
@@ -119,7 +161,8 @@ class UsersController extends AppController {
 	 * @return \Cake\Http\Response|null Redirects to index.
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
-	public function delete($id = null) {
+	public function delete($id = null)
+	{
 		$this->request->allowMethod(['post', 'delete']);
 		$user = $this->Users->get($id);
 		if ($this->Users->delete($user)) {
@@ -133,7 +176,8 @@ class UsersController extends AppController {
 
 	/* FUNÇÃO VERIFICADORA DA TELA DE LOGIN */
 
-	public function login() {
+	public function login()
+	{
 		if ($this->request->is('post')) {
 			$user = $this->Auth->identify();
 			if ($user) {
@@ -147,9 +191,9 @@ class UsersController extends AppController {
 
 	/* FUNÇÃO PARA DESLOGAR O USUÁRIO DO SISTEMA */
 
-	public function logout() {
+	public function logout()
+	{
 		$this->Flash->success(__('Deslogado com sucesso!')); //
 		return $this->redirect($this->Auth->logout());
 	}
-
 }
