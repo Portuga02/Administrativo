@@ -100,16 +100,16 @@ class UsersController extends AppController
 	public function editSenha($id = null)
 	{
 		$user = $this->Users->get($id, [
-			'contain' => [],
+			'contain' => []
 		]);
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$user = $this->Users->patchEntity($user, $this->request->getData());
 			if ($this->Users->save($user)) {
-				$this->Flash->success(__('Senha do usuário atualizada com sucesso.'));
+				$this->Flash->success(__('Senha do usuário editado com sucesso'));
 
 				return $this->redirect(['action' => 'index']);
 			}
-			$this->Flash->danger(('A senha não foi atualizada. Por favor tente novamente.'));
+			$this->Flash->danger(__('Erro: A senha do usuário não foi editado com sucesso'));
 		}
 		$this->set(compact('user'));
 	}
@@ -117,7 +117,7 @@ class UsersController extends AppController
 	{
 		$user_id = $this->Auth->user('id');
 		$user = $this->Users->get($user_id, [
-			'contain' => [],
+			'contain' => []
 		]);
 
 		if ($this->request->is(['patch', 'post', 'put'])) {
@@ -127,31 +127,43 @@ class UsersController extends AppController
 					$data = $user->toArray();
 					$this->Auth->setUser($data);
 				}
-				$this->Flash->success(__('o Perfil foi salvo com sucesso.'));
+				$this->Flash->success(__('Perfil editado com sucesso'));
 
 				return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
 			}
-			$this->Flash->danger(('O perfil não foi salvo. Por favor tente novamente.'));
+			$this->Flash->danger(__('Erro: Perfil não foi editado com sucesso'));
 		}
+
 		$this->set(compact('user'));
 	}
+
+
 	public function editSenhaPerfil()
 	{
 		$user_id = $this->Auth->user('id');
 		$user = $this->Users->get($user_id, [
-			'contain' => [],
+			'contain' => []
 		]);
 
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$user = $this->Users->patchEntity($user, $this->request->getData());
 			if ($this->Users->save($user)) {
-
-				$this->Flash->success(__('o Senha foi editada com sucesso.'));
+				$this->Flash->success(__('Senha editada com sucesso'));
 
 				return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
 			}
-			$this->Flash->danger((' Senha não foi editada. Por favor tente novamente.'));
+			$this->Flash->danger(__('Erro: Senha não foi editada com sucesso'));
 		}
+
+		$this->set(compact('user'));
+	}
+
+	public function alterarFotoPerfil()
+	{
+		$user_id = $this->Auth->user('id');
+		$user = $this->Users->get($user_id, [
+			'contain' => []
+		]);
 		$this->set(compact('user'));
 	}
 	/**
