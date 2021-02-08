@@ -164,6 +164,36 @@ class UsersController extends AppController
 		$user = $this->Users->get($user_id, [
 			'contain' => []
 		]);
+
+
+		if ($this->request->is(['patch', 'post', 'put'])) {
+
+
+			$nomeImagem = $this->request->getData()['imagem']['name'];
+			$ImagemTmp = $this->request->getData()['imagem']['tmp_name'];
+			$user =	$this->Users->newEntity();
+			$user->id = $user_id;
+			$user->imagem = $nomeImagem;
+
+			$destinoImagem =	"files\user\\" . $user_id . "\\" . $nomeImagem;
+
+			if (move_uploaded_file($ImagemTmp, WWW_ROOT . $destinoImagem)) {
+				if ($this->Users->save($user)) {
+					if ($this->Auth->user('id') === $user->id) {
+						$user = $this->Users->get($user_id, [
+							'contain' => []
+						]);
+						$this->Auth->setUser($user);
+					}
+
+					$this->Flash->sucess(__('Sucesso : Imagem editada com sucesso'));
+
+					return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
+				} else {
+					$this->Flash->danger(__("Error :Imagem não pode ser cadastrada"));
+				}
+			}
+		}
 		$this->set(compact('user'));
 	}
 	/**
