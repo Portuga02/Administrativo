@@ -164,20 +164,24 @@ class UsersController extends AppController
 		$user = $this->Users->get($user_id, [
 			'contain' => []
 		]);
-
+		$imagemAntiga = $user->imagem;
 
 		if ($this->request->is(['patch', 'post', 'put'])) {
-
-
+			//var_dump($this->request->getData());
 			$nomeImagem = $this->request->getData()['imagem']['name'];
-			$ImagemTmp = $this->request->getData()['imagem']['tmp_name'];
-			$user =	$this->Users->newEntity();
+			$imagemTemporaria = $this->request->getData()['imagem']['tmp_name'];
+			$user = $this->Users->newEntity();
 			$user->id = $user_id;
 			$user->imagem = $nomeImagem;
 
-			$destinoImagem =	"files\user\\" . $user_id . "\\" . $nomeImagem;
+			$destino = "files\user\\" . $user_id . "\\" . $nomeImagem;
 
-			if (move_uploaded_file($ImagemTmp, WWW_ROOT . $destinoImagem)) {
+			if (move_uploaded_file($imagemTemporaria, WWW_ROOT . $destino)) {
+				if (($imagemAntiga !== null) and ($imagemAntiga !== $user->imagem)) {
+					unlink(WWW_ROOT . "files\user\\" . $user_id . "\\" . $imagemAntiga);
+				}
+
+
 				if ($this->Users->save($user)) {
 					if ($this->Auth->user('id') === $user->id) {
 						$user = $this->Users->get($user_id, [
@@ -186,16 +190,17 @@ class UsersController extends AppController
 						$this->Auth->setUser($user);
 					}
 
-					$this->Flash->sucess(__('Sucesso : Imagem editada com sucesso'));
-
+					$this->Flash->success(__('Foto editada com sucesso'));
 					return $this->redirect(['controller' => 'Users', 'action' => 'perfil']);
 				} else {
-					$this->Flash->danger(__("Error :Imagem não pode ser cadastrada"));
+					$this->Flash->danger(__('Erro: Foto não foi editada com sucesso'));
 				}
 			}
 		}
+
 		$this->set(compact('user'));
 	}
+
 	/**
 	 * Delete method
 	 *
